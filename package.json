@@ -2,7 +2,7 @@
   "name": "baiye",
   "version": "6.1.0",
   "description": "Astro and Tailwindcss boilerplate",
-  "author": "zeon.studio",
+  "author": "Baiye",
   "license": "MIT",
   "packageManager": "bun@1.1.45",
   "type": "module",
