@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["import", "typescript", "unicorn", "react", "jsx_a11y", "vitest"],
+  "categories": {
+    "correctness": "deny",
+    "suspicious": "warn",
+    "style": "warn"
+  },
+  "rules": {
+    "no-debugger": "deny",
+    "no-console": "warn"
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.ts", "**/*.test.tsx"],
+      "rules": {
+        "no-unused-vars": "off"
+      }
+    }
+  ]
+}

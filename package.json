@@ -1,10 +1,10 @@
 {
-  "name": "astroplate",
+  "name": "baiye",
   "version": "6.1.0",
   "description": "Astro and Tailwindcss boilerplate",
   "author": "zeon.studio",
   "license": "MIT",
-  "packageManager": "yarn@1.22.22",
+  "packageManager": "bun@1.1.45",
   "type": "module",
   "scripts": {
     "dev": "concurrently \"node scripts/themeGenerator.js --watch\" \"node scripts/jsonGenerator.js && astro dev\"",
@@ -14,9 +14,12 @@
     "format": "prettier -w ./src",
     "generate-json": "node scripts/jsonGenerator.js",
     "generate-llms": "node scripts/llmsGenerator.js",
-    "remove-darkmode": "node scripts/removeDarkmode.js && yarn format",
-    "deploy:cf-workers": "npm run build && wrangler deploy",
-    "preview:cf-workers": "npm run build && wrangler dev"
+    "remove-darkmode": "node scripts/removeDarkmode.js && bun run format",
+    "deploy:cf-workers": "bun run build && wrangler deploy",
+    "preview:cf-workers": "bun run build && wrangler dev",
+    "lint": "oxlint src/lib/utils --tsconfig ./tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@astrojs/check": "0.9.8",
@@ -40,7 +43,8 @@
     "remark-collapse": "^0.1.2",
     "remark-toc": "^9.0.0",
     "sharp": "^0.34.5",
-    "vite": "^7.1.5"
+    "vite": "^8.0.0",
+    "vitest": "^3.2.4"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.11",
@@ -57,6 +61,7 @@
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
+    "oxlint": "^1.20.0",
     "tailwind-bootstrap-grid": "^7.0.0",
     "tailwindcss": "^4.2.2",
     "typescript": "^6.0.2",

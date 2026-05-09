@@ -1,4 +1,4 @@
-ARG INSTALLER=yarn
+ARG INSTALLER=bun
 
 FROM node:22.20.0-alpine AS base
 
@@ -11,9 +11,9 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+COPY package.json bun.lock* yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
-  if [ "${INSTALLER}" == "yarn" ]; then yarn --frozen-lockfile; \
+  if [ "${INSTALLER}" == "bun" ]; then bun install --frozen-lockfile; \
   elif [ "${INSTALLER}" == "npm" ]; then npm ci; \
   elif [ "${INSTALLER}" == "pnpm" ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
   else echo "Valid installer not set." && exit 1; \
@@ -29,7 +29,7 @@ COPY . .
 # RUN chmod u+x ./installer && ./installer
 ARG INSTALLER
 RUN \
-  if [ "${INSTALLER}" == "yarn" ]; then yarn build; \
+  if [ "${INSTALLER}" == "bun" ]; then bun run build; \
   elif [ "${INSTALLER}" == "npm" ]; then npm run build; \
   elif [ "${INSTALLER}" == "pnpm" ]; then pnpm run build; \
   else echo "Valid installer not set." && exit 1; \

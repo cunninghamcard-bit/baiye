@@ -1,14 +1,21 @@
-import searchData from ".json/search.json";
 import React, { useEffect, useState } from "react";
 import SearchResult, { type ISearchItem } from "./SearchResult";
 
 const SearchModal = () => {
   const [searchString, setSearchString] = useState("");
+  const [searchData, setSearchData] = useState<ISearchItem[]>([]);
 
   // handle input change
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchString(e.currentTarget.value.replace("\\", "").toLowerCase());
   };
+
+  useEffect(() => {
+    fetch("/.json/search.json")
+      .then((response) => response.json())
+      .then((data: ISearchItem[]) => setSearchData(data))
+      .catch(() => setSearchData([]));
+  }, []);
 
   // generate search result
   const doSearch = (searchData: ISearchItem[]) => {

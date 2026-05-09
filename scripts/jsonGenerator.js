@@ -3,7 +3,7 @@ import path from "node:path";
 import matter from "gray-matter";
 
 const CONTENT_DEPTH = 2;
-const JSON_FOLDER = "./.json";
+const JSON_FOLDER = "./public/.json";
 const BLOG_FOLDER = "src/content/blog";
 
 // get data from markdown
