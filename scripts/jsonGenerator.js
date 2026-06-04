@@ -9,7 +9,10 @@ const BLOG_FOLDER = "src/content/blog";
 // get data from markdown
 const getData = (folder, groupDepth) => {
   const getPath = fs.readdirSync(folder);
-  const removeIndex = getPath.filter((item) => !item.startsWith("-"));
+  const removeIndex = getPath.filter(
+    (item) =>
+      !item.startsWith("-") && !item.startsWith("_") && !item.startsWith("."),
+  );
 
   const getPaths = removeIndex.flatMap((filename) => {
     const filepath = path.join(folder, filename);

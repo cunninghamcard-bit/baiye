@@ -1,7 +1,11 @@
+<%*
+const title = await tp.system.prompt("文章标题（也会作为文件名和网址）");
+if (title) { await tp.file.rename(title); }
+-%>
 ---
-title: "{{title}}"
+title: "<% title %>"
 description: ""
-date: "{{date:YYYY-MM-DDTHH:mm:ss}}Z"
+date: "<% tp.date.now("YYYY-MM-DDTHH:mm:ss") %>Z"
 image: ""
 categories: ["技术"]
 author: "Baiye"
