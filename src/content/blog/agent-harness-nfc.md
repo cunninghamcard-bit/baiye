@@ -1,18 +1,21 @@
 ---
-title: 从一次 NFC 失败开始理解 agent harness
+title: agent-harness-nfc
 meta_title: ""
-description: 一次用 Codex 修复手机 NFC 的经历，以及为什么目前还需要人去 building agent。
-date: 2026-05-13T00:00:00Z
+description: ""
+date: 2026-06-04T15:48:21Z
 image: ""
 categories:
   - Agent
+  - 技术
 author: Baiye
 tags:
   - agent
   - harness
-draft: false
+  - blog
+draft: true
 ---
-## 找不到的信息
+
+## 被边界拦住
 
 我打算录入公司的门禁卡 NFC。
 
