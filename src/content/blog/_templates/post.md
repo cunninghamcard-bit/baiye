@@ -1,7 +1,7 @@
 ---
-title: "<% tp.file.title %>"
+title: "{{title}}"
 description: ""
-date: <% tp.date.now("YYYY-MM-DDT00:00:00[Z]") %>
+date: "{{date:YYYY-MM-DDTHH:mm:ss}}Z"
 image: ""
 categories: ["技术"]
 author: "Baiye"
@@ -10,10 +10,3 @@ draft: true
 ---
 
 在这里写正文。
-
-## 背景
-
-## 正文
-
-## 总结
-
