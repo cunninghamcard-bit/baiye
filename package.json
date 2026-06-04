@@ -4,7 +4,7 @@
   "description": "Astro and Tailwindcss boilerplate",
   "author": "Baiye",
   "license": "MIT",
-  "packageManager": "bun@1.1.45",
+  "packageManager": "bun@1.3.14",
   "type": "module",
   "scripts": {
     "dev": "concurrently \"node scripts/themeGenerator.js --watch\" \"node scripts/jsonGenerator.js && astro dev\"",
