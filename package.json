@@ -14,9 +14,9 @@
     "format": "prettier -w ./src",
     "generate-json": "node scripts/jsonGenerator.js",
     "generate-llms": "node scripts/llmsGenerator.js",
+    "new:post": "node scripts/newPost.js",
     "remove-darkmode": "node scripts/removeDarkmode.js && bun run format",
-    "deploy:cf-workers": "bun run build && wrangler deploy",
-    "preview:cf-workers": "bun run build && wrangler dev",
+    "deploy": "bun run build && wrangler pages deploy --project-name baiye",
     "lint": "oxlint src/lib/utils --tsconfig ./tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest"
@@ -27,6 +27,7 @@
     "@astrojs/react": "5.0.3",
     "@astrojs/sitemap": "3.7.2",
     "@digi4care/astro-google-tagmanager": "^1.6.0",
+    "@fontsource/maple-mono": "^5.2.6",
     "@justinribeiro/lite-youtube": "^1.9.0",
     "astro": "6.1.9",
     "astro-auto-import": "^0.5.1",
@@ -44,8 +45,7 @@
     "remark-toc": "^9.0.0",
     "sharp": "^0.34.5",
     "vite": "^8.0.0",
-    "vitest": "^3.2.4",
-    "@fontsource/maple-mono": "^5.2.6"
+    "vitest": "^3.2.4"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.11",

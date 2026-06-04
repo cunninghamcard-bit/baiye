@@ -25,3 +25,8 @@ pnpm-debug.log*
 
 # ide
 .idea/
+
+# Obsidian vault config (本地写作用，不入库)
+.obsidian/
+**/.obsidian/
+*.base

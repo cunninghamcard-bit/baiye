@@ -1,11 +1,7 @@
 {
-  // Cloudflare Workers — Static Assets deployment
-  // Deploy:  bun run deploy:cf-workers
-  // Preview: bun run preview:cf-workers
-  "name": "astroplate",
+  // Cloudflare Pages deployment
+  // Deploy: bun run build && bunx wrangler pages deploy --project-name baiye
+  "name": "baiye",
   "compatibility_date": "2026-03-02",
-  "assets": {
-    "directory": "./dist",
-    "not_found_handling": "404-page",
-  },
+  "pages_build_output_dir": "./dist",
 }
