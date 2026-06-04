@@ -9,7 +9,7 @@ nav:
     href: /about
 heroKicker: Issue 01 — 2026
 heroTitle: AI Native
-heroLede: 于ai来说,我是native，先行者也是native——一个刚刚生长，一个同样稚嫩。
+heroLede: 在这个时代，native与naive —初见，稚嫩
 credit: "@tp_p_pt"
 creditUrl: https://x.com/tp_p_pt
 social:
