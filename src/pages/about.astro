@@ -1,47 +1,64 @@
 ---
-import ImageMod from "@/components/ImageMod.astro";
-import Base from "@/layouts/Base.astro";
-import { getListPage } from "@/lib/contentParser.astro";
-import { markdownify } from "@/lib/utils/textConverter";
-import { render } from "astro:content";
+import NaiveBase from "@/layouts/naive/NaiveBase.astro";
+import { parseAbout, parseSite, parseImages, resolveImage } from "@/lib/naive";
+import aboutRaw from "@/content/blog/_data/about.md?raw";
+import siteRaw from "@/content/blog/_data/site.md?raw";
+import imagesRaw from "@/content/blog/_data/images.md?raw";
 
-const aboutIndex = await getListPage("about", "-index");
-const { Content } = await render(aboutIndex);
-const { title, description, meta_title, image } = aboutIndex.data;
+const site = parseSite(siteRaw);
+const about = parseAbout(aboutRaw);
 
-if (aboutIndex.data.draft) {
-  return Astro.redirect("/404");
-}
+// 站名拆成「中文 / English」两段，供标题排版
+const [brandMain, brandEn] = site.brand.split("/").map((s) => s.trim());
+const portrait = resolveImage(parseImages(imagesRaw).about_portrait);
 ---
 
-<Base
-  title={title}
-  meta_title={meta_title}
-  description={description}
-  image={image}
->
-  <section class="section-sm">
-    <div class="container">
-      <div class="row justify-center">
-        <div class="md:col-10 lg:col-8">
-          {
-            image && (
-              <ImageMod
-                class="mx-auto mb-6 rounded"
-                src={image}
-                width={1200}
-                height={600}
-                alt={title}
-                format="webp"
-              />
-            )
-          }
-          <h2 set:html={markdownify(title)} class="h3 mb-6" />
-          <div class="content">
-            <Content />
-          </div>
+<NaiveBase title={`关于 · ${site.brand}`} active="/about" bgWord="てんしん">
+  <section class="about">
+    <div class="about-grid">
+      <div class="about-figure">
+        <div class="about-hero plate">
+          {portrait ? <img src={portrait} alt="" /> : <span class="empty" style="position:absolute;inset:0"></span>}
+          <span class="sketch-frame soft"></span>
+          <div class="ticks"></div>
         </div>
+        {site.credit && (
+          <p class="about-cap">
+            <a href={site.creditUrl} target="_blank" rel="noopener">Illustration — {site.credit} ↗</a>
+          </p>
+        )}
+      </div>
+
+      <div class="about-text">
+        <div class="about-kicker">关于 · About</div>
+        <h1 class="about-title">{brandMain} {brandEn && <span class="en">/ {brandEn}</span>}</h1>
+        <span class="about-underline"></span>
+
+        <div class="about-bio">
+          <p class="lead" set:html={about.lead} />
+          {about.paragraphs.map((p) => <p set:html={p} />)}
+        </div>
+
+        {site.social.length > 0 && (
+          <div class="elsewhere">
+            <h2>Elsewhere</h2>
+            <div class="hrule"></div>
+            {site.social.map((s) => (
+              <>
+                <div class="ex-row">
+                  <span class="k">{s.k}</span>
+                  {s.href && s.href !== "#" ? (
+                    <a href={s.href} target={s.href.startsWith("http") ? "_blank" : undefined} rel="noopener">{s.label}</a>
+                  ) : (
+                    <span class="v">{s.label}</span>
+                  )}
+                </div>
+                <div class="hrule"></div>
+              </>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   </section>
-</Base>
+</NaiveBase>

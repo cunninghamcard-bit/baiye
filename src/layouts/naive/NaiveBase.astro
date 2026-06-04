@@ -1,0 +1,72 @@
+---
+// 天真 / Naive —— 共享骨架（报头/纸纹/水墨背景/字体）。
+// 首页、文章、关于、随记都从这里继承；站名与导航来自 Obsidian 里的 _data/site.md。
+//
+// props:
+//   title  —— <title> 文本
+//   active —— 高亮哪一项导航（按 site.md 里 nav 的 href 匹配，如 "/" "/notes" "/about"）
+//   bgWord —— 背景竖排淡墨大字（随记 "ノート"，首页 "じゆう"，关于 "てんしん"）
+import "@/styles/naive.css";
+import config from "@/config/config.json";
+import { parseSite, parseImages, resolveImage } from "@/lib/naive";
+import siteRaw from "@/content/blog/_data/site.md?raw";
+import imagesRaw from "@/content/blog/_data/images.md?raw";
+
+interface Props {
+  title: string;
+  active?: string;
+  bgWord?: string;
+}
+
+const { title, active, bgWord = "じゆう" } = Astro.props;
+const site = parseSite(siteRaw);
+const icon = resolveImage(parseImages(imagesRaw).icon) || config.site.favicon;
+---
+
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="icon" href={icon} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Noto+Serif+SC:wght@300;400;500;600&family=Noto+Serif+JP:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <filter id="sketch" x="-6%" y="-25%" width="112%" height="150%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.014 0.022" numOctaves="2" seed="7" result="n" />
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="1.3" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </svg>
+
+    <slot name="washes">
+      <div class="washes" aria-hidden="true">
+        <div class="bg-word">{bgWord}</div>
+        <img class="wash" src="/naive/wash1.png" style="left:-8%;top:12%;width:460px;transform:rotate(-6deg);opacity:.5" alt="" />
+        <img class="wash" src="/naive/wash3.png" style="left:-4%;top:74%;width:440px;transform:rotate(8deg);opacity:.5" alt="" />
+      </div>
+    </slot>
+
+    <div class="wrap">
+      <header class="mast">
+        <a class="brand" href="/"><span class="mark"></span><span class="word" set:html={site.brand}></span></a>
+        <nav>
+          {site.nav.map((item) => (
+            <a href={item.href} class={active === item.href ? "on" : ""}>{item.label}</a>
+          ))}
+          <a href="#">RSS</a>
+        </nav>
+      </header>
+
+      <slot />
+    </div>
+
+    <div class="grain"></div>
+  </body>
+</html>

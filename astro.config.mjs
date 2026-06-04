@@ -34,6 +34,6 @@ export default defineConfig({
   ],
   markdown: {
     remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
-    shikiConfig: { theme: "one-dark-pro", wrap: true },
+    shikiConfig: { theme: "github-light", wrap: true },
   },
 });

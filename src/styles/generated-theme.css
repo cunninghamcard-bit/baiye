@@ -6,14 +6,14 @@
 
 @theme {
   /* === Colors === */
-  --color-primary: #121212;
-  --color-body: #fff;
-  --color-border: #eaeaea;
-  --color-light: #f6f6f6;
-  --color-dark: #040404;
-  --color-text: #444444;
-  --color-text-dark: #040404;
-  --color-text-light: #717171;
+  --color-primary: #181410;
+  --color-body: #f1ebdf;
+  --color-border: #ddd5c4;
+  --color-light: #e9e2d3;
+  --color-dark: #181410;
+  --color-text: #403933;
+  --color-text-dark: #181410;
+  --color-text-light: #8d8270;
 
   /* === Darkmode Colors === */
   --color-darkmode-primary: #fff;
@@ -26,8 +26,8 @@
   --color-darkmode-text-light: #B4AFB6;
 
   /* === Font Families === */
-  --font-primary: Maple Mono, monospace;
-  --font-secondary: Maple Mono, monospace;
+  --font-primary: Noto Serif SC, serif;
+  --font-secondary: Spectral, serif;
 
   /* === Font Sizes === */
   --text-base: 16px;
