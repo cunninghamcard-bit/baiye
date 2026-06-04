@@ -6,6 +6,6 @@ image: ""
 draft: false
 ---
 
-Baiye is a personal technical blog.
+一个关于看到世界的笔记
 
-This page will be filled in as the site takes shape.
+我正在通过agent去成为自己，而不成为他人通往agent的工具
