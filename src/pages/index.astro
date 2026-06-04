@@ -18,8 +18,6 @@ const meta = (post: (typeof posts)[number]) => {
   const mins = readingTime(post.body ?? "").replace(/Mins?\s*read/i, "min").trim();
   return [cat, day, mins].filter(Boolean).join(" · ");
 };
-
-const firstHref = posts.length ? `/blog/${posts[0].id}` : "#";
 ---
 
 <NaiveBase title={site.brand} active="/" bgWord="じゆう">
@@ -29,7 +27,6 @@ const firstHref = posts.length ? `/blog/${posts[0].id}` : "#";
       <h1 set:html={site.heroTitle} />
       <span class="sketch-underline"></span>
       {site.heroLede && <p class="lede">{site.heroLede}</p>}
-      <a class="readlink mono" href={firstHref}>阅读全文 →<span class="sketch-frame"></span></a>
     </div>
     <div class="plate hero-plate">
       {heroImage ? <img src={heroImage} alt="" /> : <span class="empty" style="position:absolute;inset:0"></span>}
