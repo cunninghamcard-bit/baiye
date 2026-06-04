@@ -1,21 +1,23 @@
 ---
 import NaiveBase from "@/layouts/naive/NaiveBase.astro";
-import { parseNotes, fmtNoteDate } from "@/lib/naive";
+import { parseNotes, parseSite, fmtNoteDate } from "@/lib/naive";
 import notesRaw from "@/content/blog/_data/notes.md?raw";
+import siteRaw from "@/content/blog/_data/site.md?raw";
 
-const notes = parseNotes(notesRaw);
+const doc = parseNotes(notesRaw);
+const site = parseSite(siteRaw);
 ---
 
-<NaiveBase title="随记 · Notes · 天真 / Naive" active="/notes" bgWord="ノート">
+<NaiveBase title={`${doc.kicker} · ${site.brand}`} active="/notes" bgWord="ノート">
   <section class="notes">
-    <div class="notes-kicker">随记 · Notes</div>
-    <h1 class="notes-title">随记 <span class="en">/ Notes</span></h1>
+    <div class="notes-kicker">{doc.kicker}</div>
+    <h1 class="notes-title">{doc.titleMain} {doc.titleEn && <span class="en">/ {doc.titleEn}</span>}</h1>
     <span class="underline"></span>
-    <p class="notes-dek">没写成文章的句子。短的，碎的，但有时比长文更诚实。</p>
+    {doc.dek && <p class="notes-dek">{doc.dek}</p>}
 
     <div class="hrule"></div>
     {
-      notes.map((note) => (
+      doc.notes.map((note) => (
         <>
           <div class="note">
             <div class="note-date">{fmtNoteDate(note.date)}</div>
@@ -27,5 +29,5 @@ const notes = parseNotes(notesRaw);
     }
   </section>
 
-  <div class="notes-foot">© 2026 天真 / Naive · 共 {notes.length} 条随记</div>
+  <div class="notes-foot">© 2026 {site.brand} · 共 {doc.notes.length} 条随记</div>
 </NaiveBase>

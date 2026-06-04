@@ -8,8 +8,8 @@ nav:
   - label: About
     href: /about
 heroKicker: Issue 01 — 2026
-heroTitle: AI Native
-heroLede: 在这个时代，native与naive —初见，稚嫩
+heroTitle: AI Native的时代
+heroLede: 在这个时代，native与naive —初见，天真
 credit: "@tp_p_pt"
 creditUrl: https://x.com/tp_p_pt
 social:

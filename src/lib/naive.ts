@@ -50,14 +50,34 @@ export interface Note {
   body: string; // 已渲染好的行内 HTML
 }
 
-export function parseNotes(raw: string): Note[] {
+export interface NotesDoc {
+  kicker: string; // 顶部小标 "随记 · Notes"
+  titleMain: string; // 大标题中文部分
+  titleEn: string; // 大标题斜杠后的英文部分
+  dek: string; // 标题下那句话
+  notes: Note[];
+}
+
+export function parseNotes(raw: string): NotesDoc {
+  const { data, content } = matter(raw);
+  const d = data as { kicker?: string; title?: string; dek?: string };
+  const [titleMain, titleEn] = (d.title ?? "随记 / Notes").split("/").map((s) => s.trim());
+
   const notes: Note[] = [];
-  for (const line of raw.split(/\r?\n/)) {
+  for (const line of content.split(/\r?\n/)) {
     const m = line.match(/^\s*-\s*(\d{4}-\d{2}-\d{2})\s+(.*\S)\s*$/);
     if (m) notes.push({ date: m[1], body: inline(m[2]) });
   }
   // 按日期倒序，新的在上 —— 不依赖文件里手写的顺序。
-  return notes.sort((a, b) => (a.date < b.date ? 1 : -1));
+  notes.sort((a, b) => (a.date < b.date ? 1 : -1));
+
+  return {
+    kicker: d.kicker ?? "随记 · Notes",
+    titleMain: titleMain ?? "随记",
+    titleEn: titleEn ?? "",
+    dek: d.dek ?? "",
+    notes,
+  };
 }
 
 const WEEK = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
