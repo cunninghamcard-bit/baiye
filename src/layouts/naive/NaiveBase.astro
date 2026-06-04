@@ -30,6 +30,7 @@ const icon = resolveImage(parseImages(imagesRaw).icon) || config.site.favicon;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <link rel="icon" href={icon} />
+    <link rel="alternate" type="application/rss+xml" title={site.brand} href="/rss.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -60,7 +61,7 @@ const icon = resolveImage(parseImages(imagesRaw).icon) || config.site.favicon;
           {site.nav.map((item) => (
             <a href={item.href} class={active === item.href ? "on" : ""}>{item.label}</a>
           ))}
-          <a href="#">RSS</a>
+          <a href="/rss.xml">RSS</a>
         </nav>
       </header>
 
